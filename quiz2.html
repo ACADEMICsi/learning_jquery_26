@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Appt</title> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+
+        //jQuery
+$(document).ready(function() {
+     count = 0;
+
+     function calc() {
+
+        count = 0;
+        let qn1 = $("input[name='qn1']:checked").val();
+    let qn2 = $("input[name='qn2']:checked").val();
+    let qn3 = $("input[name='qn3']:checked").val(); 
+    
+
+    if(qn1 === "California") {
+        count++; 
+    } 
+    if(qn2 === "HTML") {
+        count++;
+    }
+    if(qn3 === "Step by step procedures"){
+        count++;
+    } 
+    
+    $("#results").text(`Score ${count} of 3`);
+     } 
+
+$("button").click(function() {
+    //alert("here  "+count);
+    calc();
+      
+    }); 
+
+$(document).keydown(function(event) {
+    if(event.key === "Enter")
+        calc();
+        
+    });
+});
+    </script>
+</head>
+<body> 
+    <div class="sec1">
+        <p>
+            1) Which State have the highest GPD in USA
+            <ul type="none">
+                <li><input type="radio" name="qn1" value="Florida"> Florida</li>
+                <li><input type="radio" name="qn1" value="New York"> New York</li>
+                <li><input type="radio" name="qn1" value="California"> California</li>
+            </ul>
+        </p> 
+        <p>
+            2) Which Frontend Techonology is used to Define structure of web pages
+            <ul type="none">
+                <li><input type="radio" name="qn2" value="CS"> CSS</li>
+                <li><input type="radio" name="qn2" value="HTML"> HTML</li>
+                <li><input type="radio" name="qn2" value="JavaScript"> JavaScript</li>
+            </ul>
+        </p> 
+        <p>
+            3) What is Algorithm?
+           <ul type="none">
+                <li><input type="radio" name="qn3" value="Set Of Steps"> Set Of Steps</li>
+                <li><input type="radio" name="qn3" value="Step by step procedures"> Step by step procedures</li>
+                <li><input type="radio" name="qn3" value="Principle of Good code"> Principle of Good code</li>
+            </ul>
+        </p>
+        <span style="margin-left: 45px;"><button>Submit</button></span>
+    </div> 
+    <div class="sec2">
+        <h2 id="results"></h2>
+    </div>
+
+    
+</body>
+</html>
