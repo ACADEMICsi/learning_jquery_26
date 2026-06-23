@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Product Gallery</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <style>
+        .product-box {
+            position: relative;
+            overflow: hidden;
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+        }
+        .product-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.2s;
+        }
+        .product-details {
+            display: none; /* Hidden by default for slideToggle */
+            margin-top: 10px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container my-5">
+        <h2 class="text-center mb-4">Interactive Product Gallery</h2>
+
+        <div class="row justify-content-center mb-4">
+            <div class="col-auto mb-2"><button id="btnToggleAll" class="btn btn-primary">Show/Hide All</button></div>
+            <div class="col-auto mb-2"><button id="btnFadeAll" class="btn btn-info">Fade In/Out</button></div>
+            <div class="col-auto mb-2"><button id="btnCustom" class="btn btn-warning">Custom Animation</button></div>
+            <div class="col-auto mb-2"><button id="btnChain" class="btn btn-dark">Bonus: Chain Effect</button></div>
+            <div class="col-auto mb-2"><button id="btnStop" class="btn btn-danger">Stop Animation</button></div>
+        </div>
+
+        <div class="row" id="galleryGrid">
+            <div class="col-md-4 col-sm-6 mb-4 target-product">
+                <div class="product-box text-center">
+                    <img src="https://picsum.photos/300/200?random=11" class="product-img" alt="Product 1">
+                    <div class="product-details">
+                        <h5>Premium Wireless Headphones</h5>
+                        <p>Noise-cancelling over-ear layout.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 mb-4 target-product">
+                <div class="product-box text-center">
+                    <img src="https://picsum.photos/300/200?random=12" class="product-img" alt="Product 2">
+                    <div class="product-details">
+                        <h5>Smart Fitness Watch</h5>
+                        <p>Heart rate monitoring tracker.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 mb-4 target-product">
+                <div class="product-box text-center">
+                    <img src="https://picsum.photos/300/200?random=13" class="product-img" alt="Product 3">
+                    <div class="product-details">
+                        <h5>Mechanical Keyboard</h5>
+                        <p>RGB backlit tactile keys.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 mb-4 target-product">
+                <div class="product-box text-center">
+                    <img src="https://picsum.photos/300/200?random=14" class="product-img" alt="Product 4">
+                    <div class="product-details">
+                        <h5>Ergonomic Gaming Mouse</h5>
+                        <p>High DPI precision sensors.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 mb-4 target-product">
+                <div class="product-box text-center">
+                    <img src="https://picsum.photos/300/200?random=15" class="product-img" alt="Product 5">
+                    <div class="product-details">
+                        <h5>UltraWide Monitor</h5>
+                        <p>4K resolution desktop display.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 mb-4 target-product">
+                <div class="product-box text-center">
+                    <img src="https://picsum.photos/300/200?random=16" class="product-img" alt="Product 6">
+                    <div class="product-details">
+                        <h5>Portable SSD Storage</h5>
+                        <p>High-speed external data drive.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    
+    <script>
+        $(document).ready(function() {
+
+            // 1. HOVER EFFECTS (Enlarge Image + Show Details via slideToggle)
+            $(".product-box").hover(
+                function() {
+                    // Mouse Enter: Enlarge image using animate() & Slide down details
+                    $(this).find(".product-img").animate({ width: "105%" }, 200);
+                    $(this).find(".product-details").slideToggle(200);
+                }, 
+                function() {
+                    // Mouse Leave: Return to normal size & slide details away
+                    $(this).find(".product-img").animate({ width: "100%" }, 200);
+                    $(this).find(".product-details").slideToggle(200);
+                }
+            );
+
+            // 2. BUTTON: Show / Hide All Products
+            $("#btnToggleAll").click(function() {
+                $(".target-product").toggle(400);
+            });
+
+            // 3. BUTTON: Fade In / Out
+            $("#btnFadeAll").click(function() {
+                $(".target-product").fadeToggle(400);
+            });
+
+            // 4. BUTTON: Custom Animation (Move image slightly across the card)
+            $("#btnCustom").click(function() {
+                $(".product-img").animate({ marginLeft: "20px" }, 300)
+                                 .animate({ marginLeft: "0px" }, 300);
+            });
+
+            // 5. BONUS: Chained Animation (Fade out -> Slide up -> Fade back in)
+            $("#btnChain").click(function() {
+                $(".target-product")
+                    .fadeTo(300, 0.3)
+                    .slideUp(400)
+                    .slideDown(400)
+                    .fadeTo(300, 1.0);
+            });
+
+            // 6. BUTTON: Stop All Running Animations Immediately
+            $("#btnStop").click(function() {
+                $(".target-product, .product-img, .product-details").stop(true, true);
+            });
+        });
+    </script>
+</body>
+</html>
